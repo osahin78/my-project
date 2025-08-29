@@ -30,4 +30,4 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Docker image build & push
-        run: docker login -u orhsahin78 -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} && docker build . -t demo-app:latest && docker push orhsahin78/demo-app:latest
+        run: docker login -u orhsahin78 -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} && docker build . -t orhsahin78/demo-app:latest && docker push orhsahin78/demo-app:latest
