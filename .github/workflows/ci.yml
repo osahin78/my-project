@@ -29,5 +29,5 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Docker image build
-        run: docker login -u orhsahin78 -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} && docker build . -t my-image:latest
+      - name: Docker image build & push
+        run: docker login -u orhsahin78 -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} && docker build . -t my-image:latest && docker push my-image:latest
