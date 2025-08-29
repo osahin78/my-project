@@ -28,7 +28,7 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Docker image build & push
+      - name: Docker image build
         run: docker build . -t orhsahin78/demo-app:latest
-      - name: Docker push
+      - name: Docker push image
         run: docker login -u orhsahin78 -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} && docker push orhsahin78/demo-app:latest
