@@ -4,4 +4,6 @@ COPY target/my-project-0.0.1-SNAPSHOT.jar /app/myapp.jar
 
 WORKDIR /app
 
+EXPOSE 8080
+
 CMD ["java", "-jar", "myapp.jar"]
