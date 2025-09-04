@@ -19,16 +19,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository code
+        id: checkout
+        uses: actions/checkout@v5
+
       - name: Set up JDK 24
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "24"
-          distribution: "temurin"
+          distribution: "oracle"
           cache: maven
+
+      - name: Unit tests
+        run: mvn -B test --file pom.xml
+
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: |
+          mvn clean
+          mvn -B package --file pom.xml
+
       - name: Docker image build
         run: docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/demo-app:latest
+
       - name: Docker push image
         run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} && docker push ${{ secrets.DOCKER_HUB_USERNAME }}/demo-app:latest
